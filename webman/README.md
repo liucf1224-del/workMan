@@ -135,3 +135,18 @@
 2. 确保数据库连接配置正确
 3. UDP 端口 2349 需要在防火墙中开放
 4. 项目中的日志记录功能会在 `logs` 目录下生成相应日志文件
+
+## 调试的时候 线上和线下可以使用的调试方式
+1.先可以线上去调试一下，对应的命令
+sudo ss -ulnp | grep :19234 这个是看你的udp端口是否是开放的
+
+sudo tcpdump -i any udp port 19234 -vv -nn  这个是看这个端口的包是不是发过来了
+
+echo '{"account": "test_permission"}' | nc -u -w 2 127.0.0.1 2349 线上可以这样校验
+
+本地需要安装一个这个 Nmap - Zenmap GUI 就可以用这个命令来玩
+下载地址 
+[网址](https://nmap.org/download.html)
+ 选windows，安装在c或者d都可以
+# 在你的Windows命令提示符或PowerShell中执行（确保已安装nmap的ncat）
+echo {"account": "final_remote_test"} | ncat -u -w 3 136.11.16.10 2349
