@@ -1,0 +1,70 @@
+{
+  "name": "workerman/webman",
+  "type": "project",
+  "keywords": [
+    "high performance",
+    "http service"
+  ],
+  "homepage": "https://www.workerman.net",
+  "license": "MIT",
+  "description": "High performance HTTP Service Framework.",
+  "authors": [
+    {
+      "name": "walkor",
+      "email": "walkor@workerman.net",
+      "homepage": "https://www.workerman.net",
+      "role": "Developer"
+    }
+  ],
+  "support": {
+    "email": "walkor@workerman.net",
+    "issues": "https://github.com/walkor/webman/issues",
+    "forum": "https://wenda.workerman.net/",
+    "wiki": "https://workerman.net/doc/webman",
+    "source": "https://github.com/walkor/webman"
+  },
+  "require": {
+    "php": ">=8.1",
+    "workerman/webman-framework": "^2.1",
+    "monolog/monolog": "^2.0",
+    "webman/database": "^2.1",
+    "illuminate/pagination": "^12.41",
+    "illuminate/events": "^12.42",
+    "symfony/var-dumper": "^7.3",
+    "webman/redis": "dev-main",
+    "vlucas/phpdotenv": "^5.6",
+    "workerman/validation": "^3.1",
+    "webman/event": "^1.0",
+    "workerman/crontab": "^1.0",
+    "phpoffice/phpspreadsheet": "^5.2",
+    "webman/gateway-worker": "^2.1",
+    "ext-pdo": "*",
+    "firebase/php-jwt": "^6.4",
+    "guzzlehttp/guzzle": "^7.9",
+    "ext-amqp": "*"
+  },
+  "suggest": {
+    "ext-event": "For better performance. "
+  },
+  "autoload": {
+    "psr-4": {
+      "": "./",
+      "app\\": "./app",
+      "App\\": "./app",
+      "app\\View\\Components\\": "./app/view/components"
+    }
+  },
+  "scripts": {
+    "post-package-install": [
+      "support\\Plugin::install"
+    ],
+    "post-package-update": [
+      "support\\Plugin::install"
+    ],
+    "pre-package-uninstall": [
+      "support\\Plugin::uninstall"
+    ]
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
+}
