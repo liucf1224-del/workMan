@@ -27,11 +27,27 @@ class StaticFile implements MiddlewareInterface
     public function process(Request $request, callable $handler): Response
     {
         // Access to files beginning with. Is prohibited
-        if (strpos($request->path(), '/.') !== false) {
-            return response('<h1>403 forbidden</h1>', 403);
+//        if (strpos($request->path(), '/.') !== false) {
+//            return response('<h1>403 forbidden</h1>', 403);
+//        }
+        // 处理预检请求(OPTIONS)
+        if ($request->method() === 'OPTIONS') {
+            return response('', 204)->withHeaders([
+                'Access-Control-Allow-Origin' => $request->header('origin', '*'),
+                'Access-Control-Allow-Methods' => $request->header('access-control-request-method', '*'),
+                'Access-Control-Allow-Headers' => $request->header('access-control-request-headers', '*'),
+                'Access-Control-Allow-Credentials' => 'true',
+                'Access-Control-Max-Age' => 86400,
+            ]);
         }
         /** @var Response $response */
         $response = $handler($request);
+        $response->withHeaders([
+            'Access-Control-Allow-Credentials' => 'true',
+            'Access-Control-Allow-Origin' => $request->header('origin', '*'),
+            'Access-Control-Allow-Methods' => $request->header('access-control-request-method', '*'),
+            'Access-Control-Allow-Headers' => $request->header('access-control-request-headers', '*'),
+        ]);
         // Add cross domain HTTP header
         /*$response->withHeaders([
             'Access-Control-Allow-Origin'      => '*',

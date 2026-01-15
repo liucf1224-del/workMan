@@ -15,6 +15,15 @@
 use Webman\Route;
 
 
+require_once app_path('api/route/api.php');
+require_once app_path('back/route/back.php');
+
+
+
+
+Route::fallback(function(){
+    return json(['code' => 404, 'msg' => '404 not found']);
+});
 
 
 
