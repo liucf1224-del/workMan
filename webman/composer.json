@@ -41,7 +41,8 @@
     "ext-pdo": "*",
     "firebase/php-jwt": "^6.4",
     "guzzlehttp/guzzle": "^7.9",
-    "ext-amqp": "*"
+    "ext-amqp": "*",
+    "smalls/video-tools": "dev-master"
   },
   "suggest": {
     "ext-event": "For better performance. "
